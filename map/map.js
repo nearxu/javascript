@@ -6,4 +6,5 @@ bank = bank.map((v,i) => {
 	return v.age < 18 ? ({...v,v.active=true}):v 
 });
 
+
 console.log(bank,'bank');

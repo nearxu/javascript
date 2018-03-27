@@ -1,4 +1,9 @@
-var promise1 = new Promise(function(res,rej){
-	setTimeout(res,5000,'foo');
+function timeout(ms){
+	return new Promise((res,rej) =>{
+		setTimeout(res,ms,'done')
+	});
+}
+
+timeout(1000).then(value =>{
+	console.log(value);
 })
-console.log(promise1)
