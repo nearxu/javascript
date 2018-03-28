@@ -19,7 +19,8 @@ class Betting extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ballArr: []
+      ballArr: [],
+      plant: []
     };
   }
   getBallArr(lotteryCode) {
@@ -63,9 +64,12 @@ class Betting extends Component {
       default:
         break;
     }
-    return { ...ballArr, ...plantContent };
+    this.setState({ plant: plant.push(planContent) });
+    return ballArr;
   }
   getExchange() {
+    const { cdkey } = this.props;
+    const { planContent } = this.state;
     http
       .post('/activity/exchange', {
         cdkey: cdkey,
@@ -117,7 +121,11 @@ class Betting extends Component {
     console.log(betArr, 'a');
     return (
       <div className="bet-model">
-        {betArr.map((m, index) => <Ball BallArr={ m } />)}
+        {betArr.map((m, index) => <Ball BallArr={m} />)}
+        <div>
+          <span onClick={this.getExchange.bind(this)} >兑换</span>
+          <span onClick={this.getExchange.bind(this)} >换一注</span>
+        </div>
       </div>
     );
   }
